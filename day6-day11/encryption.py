@@ -13,7 +13,7 @@ def encrypt(message , shift):
 
 def decrypt(message , shift):
     new_message = ''
-    for letter in message:
+    for letter in message: 
         new_shift = alphabets.index(letter) - shift
         if new_shift > 25:
             new_shift = new_shift % len(alphabets)
