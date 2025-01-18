@@ -1,5 +1,56 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+# Byte-compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+*.eggs/
+
+# Logs and debug files
+*.log
+*.pot
+*.out
+*.err
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
 .idea/
-/DS_Store
+*.swp
+*.swo
+*.swn
+
+# Testing
+.tox/
+.pytest_cache/
+.nox/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Pylint, mypy, coverage, etc.
+.mypy_cache/
+.pyre/
+.coverage
+*.cover
+.hypothesis/
+
+# Secrets
+*.pem
+*.key
