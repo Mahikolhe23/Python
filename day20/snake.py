@@ -5,54 +5,43 @@ snake = Turtle()
 scree = Screen()
 
 scree.screensize(200,200)
-snake.speed('slowest')
+snake.speed('slow')
 
 def snake_body():
-    snake.pensize(15)
+    snake.hideturtle()
     snake.dot(15)
-    snake.forward(15)
-    snake.dot(15)
+    snake.penup()
+    
+def move():
+    while True:
+        snake.forward(1)
 
 def up_arrow():
-    current_heading = snake.heading()
-    if current_heading == 0:
-        snake.left(90)
-        snake.forward(100)
-    else:
-        snake.right(90)
-        snake.forward(100)    
+    snake.setheading(90)
+    snake_body()
+    move()
+
 def down_arrow():
-    current_heading = snake.heading()
-    if current_heading == 180:
-        snake.left(90)
-        snake.forward(100)
-    else:
-        snake.right(90)
-        snake.forward(100)    
+    snake.setheading(270)
+    snake_body()
+    move()
+
 def left_arrow():
-    current_heading = snake.heading()
-    if current_heading == 90:
-        snake.left(90)
-        snake.forward(100)
-    else:
-        snake.right(90)
-        snake.forward(100)    
+    snake.setheading(180)
+    snake_body()
+    move()
 
 def right_arrow():
-    current_heading = snake.heading()
-    if current_heading == 90:
-        snake.right(90)
-        snake.forward(100)
-    else:
-        snake.left(90)
-        snake.forward(100)    
-    
+    snake.setheading(0)
+    snake_body()
+    move()
+
 scree.listen()
 scree.onkey(key='w',fun=up_arrow)
 scree.onkey(key='a',fun=left_arrow)
 scree.onkey(key='d',fun=right_arrow)
 scree.onkey(key='s',fun=down_arrow)
-snake_body()
+
 
 
 
