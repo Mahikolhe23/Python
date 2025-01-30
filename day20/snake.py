@@ -1,59 +1,52 @@
-from turtle import Turtle , Screen
-import random
+from turtle import Turtle
 
-snake = Turtle()
-scree = Screen()
+STARTING_POSITION = [(0,0), (-20,0), (-40,0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+class Snake:
+    def __init__(self):
+        self.segments = []
+        self.create_snake()
+        self.head = self.segments[0] 
 
-scree.screensize(200,200)
-snake.speed('slow')
+    def create_snake(self):
+        for position in STARTING_POSITION:
+             self.add_segment(position)
 
-def snake_body():
-    snake.hideturtle()
-    snake.dot(15)
-    snake.penup()
+    def add_segment(self, position):
+            new_segment = Turtle('square')
+            new_segment.color('white')
+            new_segment.penup()
+            new_segment.goto(position)
+            self.segments.append(new_segment)
     
-def move():
-    while True:
-        snake.forward(1)
+    def extend(self):
+         self.add_segment(self.segments[-1].position())
 
-def up_arrow():
-    snake.setheading(90)
-    snake_body()
-    move()
+    def move(self):
+            for seg_num in range(len(self.segments)-1, 0, -1):
+                new_x = self.segments[seg_num-1].xcor()
+                new_y = self.segments[seg_num-1].ycor()
+                self.segments[seg_num].goto(new_x,new_y)
+            self.head.forward(MOVE_DISTANCE)
 
-def down_arrow():
-    snake.setheading(270)
-    snake_body()
-    move()
+    def right(self):
+        if self.head.heading != LEFT:
+            self.head.setheading(RIGHT)
 
-def left_arrow():
-    snake.setheading(180)
-    snake_body()
-    move()
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
 
-def right_arrow():
-    snake.setheading(0)
-    snake_body()
-    move()
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
 
-scree.listen()
-scree.onkey(key='w',fun=up_arrow)
-scree.onkey(key='a',fun=left_arrow)
-scree.onkey(key='d',fun=right_arrow)
-scree.onkey(key='s',fun=down_arrow)
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-scree.exitonclick()
