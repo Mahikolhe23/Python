@@ -54,3 +54,9 @@ Thumbs.db
 # Secrets
 *.pem
 *.key
+
+# Default ignored files
+/shelf/
+/workspace.xml
+.idea/
+.DS_Store
