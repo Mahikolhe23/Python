@@ -1,29 +1,31 @@
-,state
-0,Andhra Pradesh
-1,Arunachal Pradesh
-2,Assam
-3,Bihar
-4,Chhattisgarh
-5,Goa
-6,Gujarat
-7,Haryana
-8,Himachal Pradesh
-9,Jharkhand
-10,Karnataka
-11,Kerala
-12,Madhya Pradesh
-13,Maharashtra
-14,Manipur
-15,Meghalaya
-16,Mizoram
-17,Nagaland
-18,Odisha
-19,Punjab
-20,Rajasthan
-21,Sikkim
-22,Tamil Nadu
-23,Telangana
-24,Tripura
-25,Uttarakhand
-26,Uttar Pradesh
-27,West Bengal
+state, x, y 
+Jammu and kashmir, 110, 224
+Himachal Pradesh , -93, 191
+Punjab, -110, 170
+Uttarakhand, -101, 129
+Haryana, -61, 147
+Rajasthan, -42, 79
+Uttar Pradesh, -152, 93
+Bihar, -190,  31
+Sikkim, -72, 4
+Assam, -37, 70
+Arunachal, 52, 57
+Nagaland, 96, 90
+Manipur, 108, 74
+Mizoram, 157, 71
+Tripura, 197, 120
+Meghalaya, 205, 63
+Gujarat, 199, 33
+Madhya Pradesh 187, 13
+Maharashtra, 160, 15
+Chhattisgarh, 148, 52
+Odisha, 99, 12
+Jharkhand, 42, 15
+West Bengal, -5, -17
+Telangana, -70, 7
+Karnataka, -117, -52
+Andhra Pradesh, 19, -46
+Kerala, -67, -90
+Tamil Nadu, -132, -133
+Goa, -53, -135
+
