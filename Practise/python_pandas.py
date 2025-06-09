@@ -1,10 +1,15 @@
+name = 'hello   world  lol'
 
-n = 9
-m = 27
-# for i in range(1, n, 2):
-#     print(('.|.' * i).center(m,'-'))
-# print('WELCOME'.center(m,'-'))
-for i in range(n-2, 0, -2):
-    print(('.|.'*i).center(m,'-')) 
+ans = []
 
+names = name.split(' ')
+# for n in names:
+#     first = n[0].upper()
+#     last = n[1:]    
+#     new_name = first + last
+#     ans.append(new_name)
 
+print(' '.join(ans))
+print(' '.join([word.capitalize() for word in name.split(' ')]))
+
+print('mahi'.capitalize())
