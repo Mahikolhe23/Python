@@ -1,9 +1,8 @@
 import pdfplumber
-import re
-import json
+import pandas as pd
+from copy import deepcopy
 
-def get_data():
-    pdf_path = '/Users/mahendrakolhe/Downloads/3-06-26 Tenterfield REPORT NM.pdf'
+def get_pdf_data(pdf_path):
     pdf = pdfplumber.open(pdf_path)
 
     result = []
@@ -17,8 +16,8 @@ def get_data():
             continue
 
         for table in tables:
-            for row in table:
-                line = [cell.strip() if cell else '' for cell in row]
+            for row in table:                
+                line = [l for l in row if l is not None]
                 if not any(line):
                     continue
 
@@ -59,12 +58,10 @@ def get_data():
                 if any("Asset ID" in l for l in line):
                     continue
 
-                # 5. Parse asset line (if it starts with numeric Asset ID)
-                if re.match(r'^\d{6,8}$', line[0]):
-                    # Pad row if needed
-                    while len(line) < 8:
-                        line.append("")
 
+
+                # 5. Parse asset line (if it starts with numeric Asset ID)
+                if str(line[0]).isnumeric:
                     asset = {
                         "Asset ID": line[0],
                         "Description": line[1],
@@ -86,8 +83,59 @@ def get_data():
 
     return result
 
+def cross_join(left, right):
+    new_rows = [] if right else left
+    for left_row in left:
+        for right_row in right:
+            temp_row = deepcopy(left_row)
+            for key, value in right_row.items():
+                temp_row[key] = value
+            new_rows.append(deepcopy(temp_row))
+    return new_rows
 
-# ✅ Extract and write output
-data = get_data()
-with open("output_hierarchical.json", "w") as f:
-    json.dump(data, f, indent=2)
+
+def flatten_list(data):
+    for elem in data:
+        if isinstance(elem, list):
+            yield from flatten_list(elem)
+        else:
+            yield elem
+
+def json_to_dataframe(data_in):
+    def flatten_json(data, prev_heading=''):
+        if isinstance(data, dict):
+            rows = [{}]
+            for key, value in data.items():
+                rows = cross_join(rows, flatten_json(value, prev_heading + '.' + key))
+        elif isinstance(data, list):
+            rows = []
+            for item in data:
+                [rows.append(elem) for elem in flatten_list(flatten_json(item, prev_heading))]
+        else:
+            rows = [{prev_heading[1:]: data}]
+        return rows
+
+    return pd.DataFrame(flatten_json(data_in))
+
+def pdf_to_csv():
+    pdf_file_path = '/Users/mahendrakolhe/Downloads/3-06-26 Tenterfield REPORT NM.pdf'
+    csv_file_path = './Practise/output_hierarchical.csv'
+
+    json_data = get_pdf_data(pdf_file_path)
+
+    df_data = json_to_dataframe(json_data)
+
+    df = pd.DataFrame(df_data)
+    df.columns = ['client','site','location','Asset ID','Description','User','Test InstrSeaward','Date','Retest Period','Next Test','Result']
+
+    df.to_csv(csv_file_path, index=False)
+
+
+def get_report():
+    pdf_to_csv()
+    csv_file_path = './Practise/output_hierarchical.csv'
+
+    
+
+
+
